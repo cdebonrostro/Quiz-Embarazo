@@ -820,11 +820,36 @@
       ctx.font = 'bold 28px system-ui';
       ctx.fillText('Educación sanitaria · Fisiología del embarazo',600,1370);
 
-      const a = document.createElement('a');
-      a.download = 'certificado-quiz-embarazo.png';
-      a.href = canvas.toDataURL('image/png');
-      a.click();
-    }
+      const dataUrl = canvas.toDataURL('image/png');
+
+const nuevaVentana = window.open();
+
+nuevaVentana.document.write(`
+<!DOCTYPE html>
+<html>
+<head>
+<title>Certificado</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{
+  margin:0;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+img{
+  max-width:100%;
+  height:auto;
+}
+</style>
+</head>
+<body>
+<img src="${dataUrl}">
+</body>
+</html>
+`);
 
     function shareResult() {
       const m = medal();
